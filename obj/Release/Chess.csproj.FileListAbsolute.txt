@@ -1,0 +1,10 @@
+C:\Users\Aldrik R\OneDrive - Office 365 Fontys\Homework\P-DB-SOFT-P-DB04\Deelproducten\Deelproduct wedstrijd\Chess\bin\Release\Chess.exe.config
+C:\Users\Aldrik R\OneDrive - Office 365 Fontys\Homework\P-DB-SOFT-P-DB04\Deelproducten\Deelproduct wedstrijd\Chess\bin\Release\Chess.exe
+C:\Users\Aldrik R\OneDrive - Office 365 Fontys\Homework\P-DB-SOFT-P-DB04\Deelproducten\Deelproduct wedstrijd\Chess\bin\Release\Chess.pdb
+C:\Users\Aldrik R\OneDrive - Office 365 Fontys\Homework\P-DB-SOFT-P-DB04\Deelproducten\Deelproduct wedstrijd\Chess\obj\Release\Chess.csprojAssemblyReference.cache
+C:\Users\Aldrik R\OneDrive - Office 365 Fontys\Homework\P-DB-SOFT-P-DB04\Deelproducten\Deelproduct wedstrijd\Chess\obj\Release\Chess.MainForm.resources
+C:\Users\Aldrik R\OneDrive - Office 365 Fontys\Homework\P-DB-SOFT-P-DB04\Deelproducten\Deelproduct wedstrijd\Chess\obj\Release\Chess.Properties.Resources.resources
+C:\Users\Aldrik R\OneDrive - Office 365 Fontys\Homework\P-DB-SOFT-P-DB04\Deelproducten\Deelproduct wedstrijd\Chess\obj\Release\Chess.csproj.GenerateResource.cache
+C:\Users\Aldrik R\OneDrive - Office 365 Fontys\Homework\P-DB-SOFT-P-DB04\Deelproducten\Deelproduct wedstrijd\Chess\obj\Release\Chess.csproj.CoreCompileInputs.cache
+C:\Users\Aldrik R\OneDrive - Office 365 Fontys\Homework\P-DB-SOFT-P-DB04\Deelproducten\Deelproduct wedstrijd\Chess\obj\Release\Chess.exe
+C:\Users\Aldrik R\OneDrive - Office 365 Fontys\Homework\P-DB-SOFT-P-DB04\Deelproducten\Deelproduct wedstrijd\Chess\obj\Release\Chess.pdb
