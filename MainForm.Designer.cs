@@ -39,6 +39,7 @@
             this.chessBoardBitmap.Size = new System.Drawing.Size(173, 146);
             this.chessBoardBitmap.TabIndex = 0;
             this.chessBoardBitmap.TabStop = false;
+            this.chessBoardBitmap.MouseClick += new System.Windows.Forms.MouseEventHandler(this.chessBoardBitmap_MouseClick);
             // 
             // MainForm
             // 

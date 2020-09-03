@@ -123,6 +123,26 @@ namespace Chess.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap square_brown_light_png_shadow_256px {
+            get {
+                object obj = ResourceManager.GetObject("square_brown_light_png_shadow_256px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap square_gray_light__png_shadow_256px {
+            get {
+                object obj = ResourceManager.GetObject("square_gray_light__png_shadow_256px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap w_bishop_png_shadow_256px {
             get {
                 object obj = ResourceManager.GetObject("w_bishop_png_shadow_256px", resourceCulture);

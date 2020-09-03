@@ -36,5 +36,10 @@ namespace Chess
             FitBoardContainerToScreen();
             this.board.HandleResize();
         }
+
+        private void chessBoardBitmap_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.board.SelectTile(this.board.MouseToTilePosition(e.X, e.Y));
+        }
     }
 }
