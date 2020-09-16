@@ -12,7 +12,7 @@ namespace Chess
 {
     public partial class MainForm : Form
     {
-        private ChessBoard board;
+        private Game game;
 
         public MainForm()
         {
@@ -21,25 +21,30 @@ namespace Chess
 
         private void FitBoardContainerToScreen()
         {
+            this.columnHeader1.Width = 30;
+
             this.chessBoardBitmap.Location = new Point(0, 0);
-            this.chessBoardBitmap.Size = new Size(this.ClientSize.Width, this.ClientSize.Height);
+            this.chessBoardBitmap.Size = new Size(this.ClientSize.Width - this.gameControlPanel.Width, this.ClientSize.Height);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
             FitBoardContainerToScreen();
-            this.board = new ChessBoard(this.chessBoardBitmap);
+            this.game = new Game(this);
         }
 
         private void MainForm_Resize(object sender, EventArgs e)
         {
+            var form = sender as MainForm;
+            if (form.WindowState == FormWindowState.Minimized) return;
+
             FitBoardContainerToScreen();
-            this.board.HandleResize();
+            this.game.HandleResize();
         }
 
-        private void chessBoardBitmap_MouseClick(object sender, MouseEventArgs e)
+        private void chessBoardBitmap_MouseDown(object sender, MouseEventArgs e)
         {
-            this.board.SelectTile(this.board.MouseToTilePosition(e.X, e.Y));
+            this.game.HandleClick(e.X, e.Y);
         }
     }
 }

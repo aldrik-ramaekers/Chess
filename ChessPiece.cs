@@ -26,7 +26,7 @@ namespace Chess
             IsWhite = isWhite;
         }
 
-        internal MoveCheckResult CanMoveUpLeft(ChessBoard board, BoardTile currentTile, BoardTile destinationTile, int count = 8)
+        internal virtual MoveCheckResult CanMoveUpLeft(ChessBoard board, BoardTile currentTile, BoardTile destinationTile, int count = ChessBoard.BoardSize)
         {
             for (int t = 1; t <= count; t++)
             {
@@ -41,7 +41,7 @@ namespace Chess
             return MoveCheckResult.ContinueCheck;
         }
 
-        internal MoveCheckResult CanMoveUpRight(ChessBoard board, BoardTile currentTile, BoardTile destinationTile, int count = 8)
+        internal virtual MoveCheckResult CanMoveUpRight(ChessBoard board, BoardTile currentTile, BoardTile destinationTile, int count = ChessBoard.BoardSize)
         {
             for (int t = 1; t <= count; t++)
             {
@@ -57,7 +57,7 @@ namespace Chess
         }
 
 
-        internal MoveCheckResult CanMoveDownRight(ChessBoard board, BoardTile currentTile, BoardTile destinationTile, int count = 8)
+        internal virtual MoveCheckResult CanMoveDownRight(ChessBoard board, BoardTile currentTile, BoardTile destinationTile, int count = ChessBoard.BoardSize)
         {
             for (int t = 1; t <= count; t++)
             {
@@ -72,7 +72,7 @@ namespace Chess
             return MoveCheckResult.ContinueCheck;
         }
 
-        internal MoveCheckResult CanMoveDownLeft(ChessBoard board, BoardTile currentTile, BoardTile destinationTile, int count = 8)
+        internal virtual MoveCheckResult CanMoveDownLeft(ChessBoard board, BoardTile currentTile, BoardTile destinationTile, int count = ChessBoard.BoardSize)
         {
             for (int t = 1; t <= count; t++)
             {
@@ -87,7 +87,7 @@ namespace Chess
             return MoveCheckResult.ContinueCheck;
         }
 
-        internal MoveCheckResult CanMoveLeft(ChessBoard board, BoardTile currentTile, BoardTile destinationTile, int count = 8)
+        internal virtual MoveCheckResult CanMoveLeft(ChessBoard board, BoardTile currentTile, BoardTile destinationTile, int count = ChessBoard.BoardSize)
         {
             if (currentTile.Y != destinationTile.Y) return MoveCheckResult.ContinueCheck;
 
@@ -105,7 +105,7 @@ namespace Chess
             return MoveCheckResult.ContinueCheck;
         }
 
-        internal MoveCheckResult CanMoveRight(ChessBoard board, BoardTile currentTile, BoardTile destinationTile, int count = 8)
+        internal virtual MoveCheckResult CanMoveRight(ChessBoard board, BoardTile currentTile, BoardTile destinationTile, int count = ChessBoard.BoardSize)
         {
             if (currentTile.Y != destinationTile.Y) return MoveCheckResult.ContinueCheck;
 
@@ -123,7 +123,7 @@ namespace Chess
             return MoveCheckResult.ContinueCheck;
         }
 
-        internal MoveCheckResult CanMoveDown(ChessBoard board, BoardTile currentTile, BoardTile destinationTile, int count = 8)
+        internal virtual MoveCheckResult CanMoveDown(ChessBoard board, BoardTile currentTile, BoardTile destinationTile, int count = ChessBoard.BoardSize)
         {
             if (currentTile.X != destinationTile.X) return MoveCheckResult.ContinueCheck;
 
@@ -141,7 +141,7 @@ namespace Chess
             return MoveCheckResult.ContinueCheck;
         }
 
-        internal MoveCheckResult CanMoveUp(ChessBoard board, BoardTile currentTile, BoardTile destinationTile, int count = 8)
+        internal virtual MoveCheckResult CanMoveUp(ChessBoard board, BoardTile currentTile, BoardTile destinationTile, int count = ChessBoard.BoardSize)
         {
             if (currentTile.X != destinationTile.X) return MoveCheckResult.ContinueCheck;
 
@@ -159,14 +159,62 @@ namespace Chess
             return MoveCheckResult.ContinueCheck;
         }
 
+        internal bool WillKingBeAttackedIfMovedTo(ChessBoard board, BoardTile currentTile, BoardTile destinationTile)
+        {
+            bool result = false;
+
+            var friendlyKingTile = board.TilesByPieceType(typeof(Chess.Pieces.King), this.IsWhite).FirstOrDefault();
+
+            // Temporarely move piece to destination to check if king will be attacked.
+            ChessPiece tempHolder = destinationTile.OccupyingPiece;
+            destinationTile.OccupyingPiece = currentTile.OccupyingPiece;
+
+            if (currentTile != destinationTile)
+                currentTile.OccupyingPiece = null;
+
+            if (this.GetType() == typeof(Chess.Pieces.King))
+            {
+                friendlyKingTile = destinationTile;
+            }
+
+            for (int y = 0; y < ChessBoard.BoardSize; y++)
+            {
+                for (int x = 0; x < ChessBoard.BoardSize; x++)
+                {
+                    var tileToCheck = board.Tiles[y, x];
+
+                    if (tileToCheck.OccupyingPiece != null && tileToCheck.OccupyingPiece != this && tileToCheck.OccupyingPiece.CanMoveTo(board, tileToCheck, friendlyKingTile))
+                    {
+                        result = true;
+                        break;
+                    }
+                }
+            }
+
+            // Move pieces back.
+            currentTile.OccupyingPiece = destinationTile.OccupyingPiece;
+            destinationTile.OccupyingPiece = tempHolder;
+
+            return result;
+        }
+
+        public virtual void PostMovementEvent(BoardTile tile)
+        {
+            
+        }
+
         public abstract bool CanMoveTo(ChessBoard board, BoardTile currentTile, BoardTile destinationTile);
+
         public void Draw(Graphics graphics, float x, float y, float tileWidth, float tileHeight)
         {
             if (PieceImage != null)
             {
-                var image = ImageHelper.ResizeImage(PieceImage, (int)tileWidth, (int)tileHeight);
+                int imgW = (int)(tileWidth / 1.3);
+                int imgH = (int)(tileHeight / 1.3);
 
-                graphics.DrawImage(image, new PointF(x * tileWidth + (tileWidth/ 40), y * tileHeight + (tileWidth / 40)));
+                var image = ImageHelper.ResizeImage(PieceImage, imgW, imgH);
+
+                graphics.DrawImage(image, new PointF(x * tileWidth + (tileWidth / 2) - (imgW / 2), y * tileHeight + (tileHeight / 2) - (imgH / 2)));
 
                 image.Dispose();
             }

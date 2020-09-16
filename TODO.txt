@@ -1,0 +1,5 @@
+﻿List of unimplemented rules:
+- 75 move rule
+- en passant
+- dont allow castling when in check
+- dont allow castling when king passes an attacked tile

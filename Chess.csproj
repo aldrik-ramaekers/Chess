@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,6 +52,11 @@
     <Compile Include="BoardTile.cs" />
     <Compile Include="ChessBoard.cs" />
     <Compile Include="ChessPiece.cs" />
+    <Compile Include="Events\GameFinishedEvent.cs" />
+    <Compile Include="Events\RoundFinishedEvent.cs" />
+    <Compile Include="Extensions\GraphicsExtensions.cs" />
+    <Compile Include="Extensions\UdpClientExtensions.cs" />
+    <Compile Include="Game.cs" />
     <Compile Include="ImageHelper.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -56,16 +64,21 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Networking\INetworkMessage.cs" />
+    <Compile Include="Networking\NetworkManager.cs" />
     <Compile Include="Pieces\Bishop.cs" />
     <Compile Include="Pieces\King.cs" />
     <Compile Include="Pieces\Knight.cs" />
     <Compile Include="Pieces\Pawn.cs" />
     <Compile Include="Pieces\Queen.cs" />
     <Compile Include="Pieces\Rook.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="PlayerMove.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -77,6 +90,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -131,6 +145,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\square gray light _png_shadow_256px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TODO.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
